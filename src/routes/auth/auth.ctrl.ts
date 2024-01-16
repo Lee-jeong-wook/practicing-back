@@ -10,7 +10,6 @@ const post = {
             const id = 'vappet'
             const nick = 'hodoopapa'
             // jwt.sign() 메소드: 토큰 발급 
-            console.log('JWT_SECRET:', process.env.JWT_SECRET);
             const token = jwt.sign({
                 id, 
                 nick, 
@@ -31,6 +30,9 @@ const post = {
             });  
         }
     },
+    checkToken : (req:Request, res:Response) => {
+        console.log("hi");
+    }
 }
 
 module.exports= {

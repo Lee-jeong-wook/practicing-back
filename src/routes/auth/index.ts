@@ -9,5 +9,6 @@ const authRouter = Router();
 
 //get은 ctrl 뒤에 output, post는 post를 붙임
 authRouter.post('/make', ctrl.post.makeToken);
+authRouter.post('/check', verifyToken,ctrl.post.checkToken);
 
 module.exports= authRouter;

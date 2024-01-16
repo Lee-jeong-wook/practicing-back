@@ -1,12 +1,15 @@
 import { Request, Response, NextFunction } from "express";
 import { UserToken } from "../interfaces/UserToken";
+import dotenv from 'dotenv';
+import { TokenExpiredError } from "jsonwebtoken";
+dotenv.config();
 
 const jwt = require('jsonwebtoken');
 
 export const verifyToken = (req: Request, res: Response, next: NextFunction) => {
   // 인증 완료
   try {
-    const userToken = req.headers.Authorization;
+    const userToken = req.headers.authorization;
     console.log(userToken);
 
     if (!userToken) {
@@ -20,7 +23,7 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction) => 
   
   // 인증 실패 
   catch(error) {
-    if (error instanceof Error && error.name === 'TokenExpireError') {
+    if (error instanceof TokenExpiredError) {
       return res.status(419).json({
         code: 419,
         message: '토큰이 만료되었습니다.'
