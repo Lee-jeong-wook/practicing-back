@@ -1,14 +1,16 @@
 import { Request, Response} from "express"; 
 import {verifyToken} from '../../middleware/middleware';
 const jwt = require('jsonwebtoken');
+import dotenv from 'dotenv';
+dotenv.config();
 
 const post = {
-    postFunc: async (req: Request, res: Response) => {
+    makeToken: async (req: Request, res: Response) => {
         try {
             const id = 'vappet'
             const nick = 'hodoopapa'
             // jwt.sign() 메소드: 토큰 발급 
-            console.log('hi');
+            console.log('JWT_SECRET:', process.env.JWT_SECRET);
             const token = jwt.sign({
                 id, 
                 nick, 

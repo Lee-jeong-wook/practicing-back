@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 export const verifyToken = (req: Request, res: Response, next: NextFunction) => {
   // 인증 완료
   try {
-    const userToken = req.headers["authorization"]?.split(" ")[1] ?? "null";
+    const userToken = req.headers.Authorization;
     console.log(userToken);
 
     if (!userToken) {
