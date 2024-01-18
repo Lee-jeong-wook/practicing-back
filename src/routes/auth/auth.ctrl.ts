@@ -7,12 +7,11 @@ dotenv.config();
 const post = {
     makeToken: async (req: Request, res: Response) => {
         try {
-            const id = 'vappet'
-            const nick = 'hodoopapa'
+            const data = req.body;
             // jwt.sign() 메소드: 토큰 발급 
             const token = jwt.sign({
-                id, 
-                nick, 
+                id : data.id, 
+                isAdmin : data.isAdmin, 
             }, process.env.JWT_SECRET, {
                 expiresIn: '1m', //1분
                 issuer: '토큰 발급자'
