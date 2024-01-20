@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { UserToken } from "../interfaces/UserToken";
 import dotenv from 'dotenv';
 import { TokenExpiredError } from "jsonwebtoken";
+import TokenModel from "../model/TokenModel";
 dotenv.config();
 
 const jwt = require('jsonwebtoken');
@@ -10,14 +11,18 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction) => 
   // 인증 완료
   try {
     const userToken = req.headers.authorization;
-    console.log(userToken);
+    // console.log(userToken);
+    // console.log(userToken);
 
-    if (!userToken) {
-      throw new Error('권한 없음');
-    }
+    // if (!userToken) {
+    //   throw new Error('권한 없음');
+    // }
 
-    const jwtDecoded: any = jwt.verify(userToken, process.env.JWT_SECRET);
-    console.log(jwtDecoded);
+    // const jwtDecoded: any = jwt.verify(userToken, process.env.JWT_SECRET);
+    // console.log(jwtDecoded);
+    const tokenModel = new TokenModel();
+    const response = tokenModel.verify(userToken);
+    console.log(response);
     return next();
   }
   

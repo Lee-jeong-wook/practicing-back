@@ -2,6 +2,7 @@ import { Request, Response} from "express";
 import {verifyToken} from '../../middleware/middleware';
 const jwt = require('jsonwebtoken');
 import dotenv from 'dotenv';
+import TokenModel from "../../model/TokenModel";
 dotenv.config();
 
 const post = {
@@ -30,7 +31,7 @@ const post = {
         }
     },
     checkToken : (req:Request, res:Response) => {
-        console.log("hi");
+        // console.log(res);
     }
 }
 

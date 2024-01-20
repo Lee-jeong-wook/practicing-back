@@ -9,9 +9,9 @@ const output = {
 
 //post 방식으로 req, res 처리하는 코드들
 const post = {
-    // postFunc: async (req: Request, res: Response) => {
-    //     req
-    // },
+    getFollower: async (req:Request, res:Response) => {
+        
+    }
 }
 
 module.exports= {
