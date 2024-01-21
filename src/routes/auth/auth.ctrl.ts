@@ -9,14 +9,9 @@ const post = {
     makeToken: async (req: Request, res: Response) => {
         try {
             const data = req.body;
+            const tokenModle = new TokenModel();
             // jwt.sign() 메소드: 토큰 발급 
-            const token = jwt.sign({
-                id : data.id, 
-                isAdmin : data.isAdmin, 
-            }, process.env.JWT_SECRET, {
-                expiresIn: '1m', //1분
-                issuer: '토큰 발급자'
-            });
+            const token = tokenModle.refresh(data);
             return res.json({
                 code: 200,
                 message: '토큰이 발급되었습니다.',
@@ -32,7 +27,8 @@ const post = {
     },
     checkToken : (req:Request, res:Response) => {
         // console.log(res);
-    }
+    },
+
 }
 
 module.exports= {

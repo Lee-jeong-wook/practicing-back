@@ -1,4 +1,4 @@
 export interface UserToken{
-    userID : string,
+    id : string,
     isAdmin: boolean
 }

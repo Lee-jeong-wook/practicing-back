@@ -1,6 +1,8 @@
 import { TokenExpiredError } from "jsonwebtoken";
 import { UserToken } from "../interfaces/UserToken";
+import dotenv from "dotenv";
 const jwt = require('jsonwebtoken');
+dotenv.config();
 
 class TokenModel {
     verify(data: string|undefined):string{
@@ -23,10 +25,25 @@ class TokenModel {
           }
     }
     access(data: UserToken){
-        const accessToken = jwt.sign()
+        const token = jwt.sign({
+            id : data.id, 
+            isAdmin : data.isAdmin, 
+        }, process.env.JWT_SECRET, {
+            expiresIn: '1m', //1분
+            issuer: '토큰 발급자'
+        });
+        return token;
     }
     refresh(data: UserToken){
-
+        const token = jwt.sign({
+            id : data.id, 
+            isAdmin : data.isAdmin, 
+        }, process.env.JWT_SECRET, {
+            expiresIn: '3h',
+            issuer: '토큰 발급자'
+        });
+        const accessToken = this.access(data);
+        return [token, accessToken];
     }
 }
 
